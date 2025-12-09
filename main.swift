@@ -41,13 +41,10 @@ if day < 1 || day > 25 {
 let homeDirectory = FileManager.default.homeDirectoryForCurrentUser
 let dataFileUrl = homeDirectory.appending(components: "workplace", "AdventOfCode", "2025", "AdventOfCode-2025", "input", String(format:"%02d", day), filename)
 let input = try String(contentsOf: dataFileUrl, encoding: .utf8)
-//else {
-//  print("Failed to read input")
-//  exit(1)
-//}
 
 let solver: Solution? = switch day {
 case 1: Day01()
+case 2: Day02()
 default: nil
 }
 
