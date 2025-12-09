@@ -45,6 +45,7 @@ let input = try String(contentsOf: dataFileUrl, encoding: .utf8)
 let solver: Solution? = switch day {
 case 1: Day01()
 case 2: Day02()
+case 3: Day03()
 default: nil
 }
 
