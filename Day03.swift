@@ -11,14 +11,14 @@ class Day03 : Solution {
   func part1(input: String) -> String {
     let bankSum = parse(input: input)
       .map { bank in maxJolts(in: bank) }
-      .reduce(0) { acc, jolts in acc + jolts }
+      .sum()
     return "\(bankSum)"
   }
   
   func part2(input: String) -> String {
     let bankSum = parse(input: input)
       .map { bank in maxJolts(in: bank, cells: 12) }
-      .reduce(0) { acc, jolts in acc + jolts }
+      .sum()
     return "\(bankSum)"
   }
   
@@ -89,13 +89,7 @@ class Day03 : Solution {
   
   func parse(input: String) -> [[Int]] {
     return input.split(separator: "\n")
-      .compactMap { line in
-        let trimmed = line.trimmingCharacters(in: .whitespacesAndNewlines)
-        if trimmed.isEmpty {
-          return nil as String?
-        } else {
-          return trimmed
-        }
-      }.map { (line: String) in line.map { $0.wholeNumberValue! } }
+      .compactMap { line in line.trim() }
+      .map { (line: String) in line.map { $0.wholeNumberValue! } }
   }
 }
