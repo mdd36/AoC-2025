@@ -48,6 +48,7 @@ case 2: Day02()
 case 3: Day03()
 case 4: Day04()
 case 5: Day05()
+case 6: Day06()
 default: nil
 }
 

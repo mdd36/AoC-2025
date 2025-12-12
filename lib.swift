@@ -22,6 +22,15 @@ extension Array where Element : AdditiveArithmetic {
   }
 }
 
+extension Array where Element == Int {
+  func prod() -> Int {
+    if isEmpty {
+      return 0
+    }
+    return reduce(1) { acc, elem in acc * elem }
+  }
+}
+
 extension Array {
   func bisectLeft<T>(for elem: Element, key: (Element) -> T) -> Index where T : Comparable {
     return bisectLeft(for: key(elem), key: key)
