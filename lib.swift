@@ -71,4 +71,57 @@ extension Array {
     
     return Index(lo)
   }
+  
+  func pairwise() -> [(Element, Element)] {
+    return (0..<count)
+      .flatMap { i in ((i+1)..<count).flatMap { j in (self[i], self[j]) } }
+  }
+}
+
+class UnionFind<T : Hashable & Equatable> {
+  var parents: [T: T]
+  var sizes: [T: Int]
+  
+  init(items: [T]) {
+    self.parents = items.reduce(into: [:]) { result, val in result[val] = val }
+    self.sizes = items.reduce(into: [:]) { result, val in result[val] = 1 }
+  }
+  
+  func union(_ first: T, _ second: T) -> Bool {
+    guard
+      let firstP = find(first),
+      let secondP = find(second),
+      let firstSize = sizes[firstP],
+      let secondSize = sizes[secondP]
+    else {
+      return false
+    }
+    
+    if firstP == secondP {
+      return false
+    }
+    
+    if firstSize < secondSize {
+      parents[secondP] = firstP
+      sizes[firstP] = firstSize + secondSize
+    } else {
+      parents[firstP] = secondP
+      sizes[secondP] = firstSize + secondSize
+    }
+    return true
+  }
+  
+  func find(_ val: T) -> T? {
+    guard let p = parents[val] else {
+      return nil
+    }
+    
+    if p == val {
+      return val
+    } else {
+      let newParent = find(p)!
+      parents[val] = newParent
+      return newParent
+    }
+  }
 }
